@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: storage-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/storage?userSSL=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowMultiQueries=true
+    username: root
+    password: 112233
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: demo
+        group: demo
+        file-extension: yaml
+        refresh-enabled: true
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: demo
+        group: demo
+seata:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      namespace: seata
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  registry:
+    type: nacos
+    nacos:
+      namespace: demo
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+  enable-auto-data-source-proxy: true
+  tx-service-group: seata-storage-service
